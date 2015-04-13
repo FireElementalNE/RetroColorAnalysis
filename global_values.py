@@ -25,7 +25,8 @@ SCRIPT_JS = '../../HTML_STATIC/Javascript/libs/bootstrap.min.js'
 
 STATS_FILENAME = 'color.statistics'
 STATS_FILENAME_AGG = 'color_aggregate.statistics'
-DISTANCE_METRIC_TAG = "HSV Distance"
+DISTANCE_METRIC_TAG_HSV = "HSV Distance"
+DISTANCE_METRIC_TAG_LAB = "LAB Distance"
 STAT_ENDING_TMP = '.stattmp'
 
 FILE_STATS_RE = '^\[.*\] (.*)$'

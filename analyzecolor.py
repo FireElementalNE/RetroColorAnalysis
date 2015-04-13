@@ -95,9 +95,12 @@ def analyze_outputs(foldername,game_name):
     for el in final_list:
         z = '-'.join([str(x) for x in el])
         new_final_list.append(z)
-    distance_metric = color_utils.avg_distance_colors(new_final_list)
-    stat = [os.path.basename(stat_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG, str(distance_metric)]
-    global_utils.write_to_stat_fh(stat_fh, stat)
+    distance_metric1 = color_utils.avg_distance_colors(new_final_list, 'hsv')
+    distance_metric2 = color_utils.avg_distance_colors(new_final_list, 'lab')
+    stat = [[os.path.basename(stat_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
+            [os.path.basename(stat_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)]]
+    global_utils.write_to_stat_fh(stat_fh, stat[0])
+    global_utils.write_to_stat_fh(stat_fh, stat[1])
     stat_fh.close()
 
 
@@ -126,9 +129,12 @@ def analyze_individual(full_file_name, foldername, output_dir):
     new_sorted_x = []
     for el in sorted_x[:global_values.number_of_colors]:
         new_sorted_x.append(el[0])
-    distance_metric = color_utils.avg_distance_colors(new_sorted_x)
-    stat = [os.path.basename(full_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG, str(distance_metric)]
-    global_utils.write_to_stat_fh(stat_fh, stat)
+    distance_metric1 = color_utils.avg_distance_colors(new_sorted_x, 'hsv')
+    distance_metric2 = color_utils.avg_distance_colors(new_sorted_x, 'lab')
+    stat = [[os.path.basename(full_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
+            [os.path.basename(full_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)]]
+    global_utils.write_to_stat_fh(stat_fh, stat[0])
+    global_utils.write_to_stat_fh(stat_fh, stat[1])
     stat_fh.close()
 
 
