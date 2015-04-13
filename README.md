@@ -5,8 +5,6 @@ By FireElementalNE
 
 This program is made to analyze old game maps for color information.  
 
-To use all that is needed are simple command line arguments:
-
 ```
 usage: main.py [-h] [-i INPUT] [-o OUTPUT] [-a] [-t] [-H HTML]
 
@@ -23,11 +21,10 @@ optional arguments:
   -H HTML, --Html HTML  build html file
 ```
 
-NOTE: While it says the arguments are optional it is required that at least  
-one is chosen.
+NOTE: All arguments are marked as optional, however you mush choose either i, o or h.
 
-**NOTE:** Threaded execution and all (-a option) do not currently work
+**NOTE:** The -t option and the -a option do nothing (works in progress)
 
-The only external dependency is Python Imaging Library found [Here](http://www.pythonware.com/products/pil/ "PIL").  
+The only external dependency is The Python Imaging Library found [Here](http://www.pythonware.com/products/pil/ "PIL").  
 
 This README is under construction (Hold your criticism!)
