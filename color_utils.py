@@ -5,6 +5,7 @@ import math
 # TODO: Switch to LAB color space instead of HSV
 # TODO: think of better multiple metrics:
 #       Warmness, coldness, closeness to each other, clustering
+# TRY THIS: http://stackoverflow.com/a/21924155
 
 
 def rgb2lab ( inputColor ) : # http://stackoverflow.com/a/16020102
