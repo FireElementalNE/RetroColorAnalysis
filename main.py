@@ -11,6 +11,7 @@ from remove_thumbs import remove_all_thumbs
 import html_builder
 import time
 
+# TODO: Pidgen hole how close colors are (are there alot of complimentary colors? similar (analagous) colors? cool, warm? satuarion?)
 
 def analyze_image(game_name, arg_type, threaded):
     arg_check = global_utils.check_input(game_name, arg_type)
