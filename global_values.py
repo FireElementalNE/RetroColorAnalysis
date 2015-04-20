@@ -27,6 +27,7 @@ STATS_FILENAME = 'color.statistics'
 STATS_FILENAME_AGG = 'color_aggregate.statistics'
 DISTANCE_METRIC_TAG_HSV = "HSV Distance"
 DISTANCE_METRIC_TAG_LAB = "LAB Distance"
+DISTANCE_METRIC_TAG_CCT = "Average CCT"
 STAT_ENDING_TMP = '.stattmp'
 
 FILE_STATS_RE = '^\[.*\] (.*)$'

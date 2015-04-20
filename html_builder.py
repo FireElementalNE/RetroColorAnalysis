@@ -5,6 +5,10 @@ import sys
 from result_class import ImgResult
 
 def build_html(game_name):
+    '''
+    :param game_name: the game name
+    :return: none (but html file is created)
+    '''
     arg_check = global_utils.check_input(game_name, global_values.HTML_MODE)
     if arg_check[0]:
         stuff = ImgResult(game_name)

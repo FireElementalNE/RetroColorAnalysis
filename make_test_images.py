@@ -5,6 +5,10 @@ import global_utils
 import global_values
 
 def run_main(num):
+    '''
+    :param num: The number of images to make
+    :return: Nothing but creates the images
+    '''
     global_utils.check_folders(global_values.TEST_FOLDER_NAME)
     for i in range(num):
         filename = '%d-test-out.png' % (i)
