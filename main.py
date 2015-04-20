@@ -30,17 +30,15 @@ def analyze_image(game_name, arg_type, threaded):
             directory_search = global_utils.get_input_directory(game_name)
             for root, dirnames, filenames in os.walk(directory_search):
                 for filename in filenames:
-                    if not filename.endswith('db'):
+                    if not filename.endswith('db') and not filename.endswith(global_values.STAT_ENDING_TMP):
                         full_file_name = os.path.join(directory_search, filename)
-                        final_file_folder_name = global_utils.make_final_file_folder_name(game_name, filename)
-                        output_dir = global_utils.get_output_directory(game_name)
                         print 'Working on file %s.' % (filename)
                         #if (threaded):
                             #p = multiprocessing.Process(target=analyze_individual,
                             #                            args=(full_file_name, final_file_folder_name, output_dir), )
                             #threads.append(p)
                         #else:
-                        analyze_individual(full_file_name, final_file_folder_name, output_dir)
+                        analyze_individual(global_utils.dirs_map(full_file_name, game_name))
             output_dir = global_utils.get_output_directory(game_name)
             final_statistic_fh = open(os.path.join(output_dir, global_values.STATS_FILENAME), 'w+')
             for root, dirnames, filenames in os.walk(output_dir):
@@ -54,7 +52,7 @@ def analyze_image(game_name, arg_type, threaded):
             final_statistic_fh.close()
         elif arg_type == global_values.OUTPUT_MODE:
             directory_search = global_utils.get_output_directory(game_name)
-            analyze_outputs(directory_search,game_name)
+            analyze_outputs(global_utils.dirs_map('', game_name))
         #if threaded:
             #[x.start() for x in threads]
             #[x.join() for x in threads]
@@ -87,7 +85,6 @@ if __name__ == "__main__":
     elif args.Html and not args.output and not args.input and not args.all:
         if args.threaded:
             print 'Threaded does nothing here.'
-        print args.Html
         html_builder.build_html(args.Html)
     else:
         print 'Cant use all'

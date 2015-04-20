@@ -61,9 +61,9 @@ def avg_color_list(list):
 
 def actual_image_analysis(full_file_name):
     '''
-    Does the actual pixel analysis
-    :param full_file_name:  the full file path of the image
-    :return: list of the top colors
+    Does the actual pi
+    :param full_file_name:
+    :return:
     '''
     original = Image.open(full_file_name).convert('RGB')
     hash_list = {}
@@ -85,20 +85,49 @@ def actual_image_analysis(full_file_name):
     return sorted_x
 
 
-def analyze_outputs(foldername,game_name):
+def calculate_stats(final_list, stat_file_name):
     '''
-    Anaylzes the swatch outputs of the individual images to make
-    aggregate statistics
-    :param foldername: the foldername
-    :param game_name: the gamename
-    :return: nothing but creates new stats
+    Takes a list of the most common rgb values and runs various stat
+    checks on them
+    :param final_list: the list of rgb values
+    :param stat_file_name: the file name
+    :return: nothing but writes stat file
     '''
+    stat_fh = open(stat_file_name, 'w+')
+    distance_metric1 = color_utils.avg_distance_colors(final_list, 'hsv')
+    distance_metric2 = color_utils.avg_distance_colors(final_list, 'lab')
+    distance_metric3 = color_utils.avg_distance_colors(final_list, 'cct')
+    distance_metric4 = color_utils.avg_distance_colors(final_list, 'cct_max')
+    distance_metric5 = color_utils.avg_distance_colors(final_list, 'cct_min')
+    stat = [[os.path.basename(stat_file_name).split('.')[0],
+             global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
+            [os.path.basename(stat_file_name).split('.')[0],
+             global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric2)],
+            [os.path.basename(stat_file_name).split('.')[0],
+             global_values.DISTANCE_METRIC_TAG_CCT, str(distance_metric3)],
+            [os.path.basename(stat_file_name).split('.')[0],
+             global_values.DISTANCE_METRIC_TAG_CCT_MAX, str(distance_metric4)],
+            [os.path.basename(stat_file_name).split('.')[0],
+             global_values.DISTANCE_METRIC_TAG_CCT_MIN, str(distance_metric5)]]
+    for x in stat:
+        global_utils.write_to_stat_fh(stat_fh,x)
+    stat_fh.close()
+
+
+
+def analyze_outputs(dirs):
+    '''
+    Analyze the output images from the input step
+    :param dirs: the dirs structure
+    :return: nothing makes stats and image file
+    '''
+    output_dir = dirs[3]
     all_colors = []
     counter = 0
-    for root, dirnames, filenames in os.walk(foldername):
+    for root, dirnames, filenames in os.walk(output_dir):
         for filename in filenames:
             if filename.endswith('png'):
-                all_colors.append(actual_image_analysis(os.path.join(foldername, filename)))
+                all_colors.append(actual_image_analysis(os.path.join(output_dir, filename)))
                 counter += 1
     final_list = []
     for index in range(global_values.number_of_colors):
@@ -121,36 +150,23 @@ def analyze_outputs(foldername,game_name):
         for y in range(imOut.size[1]):
             pixels[x, y] = (int(current[0]), int(current[1]), int(current[2]))
         count += 1
-    imOut.save(foldername + '_aggregate.png')
-    stat_file_name = os.path.join(global_utils.get_base_dir(game_name), global_values.STATS_FILENAME_AGG)
-    stat_fh = open(stat_file_name, 'w+')
+    imOut.save(dirs[7])
+    stat_file_name = dirs[6]
     new_final_list = []
     for el in final_list:
         z = '-'.join([str(x) for x in el])
         new_final_list.append(z)
-    # write stats
-    distance_metric1 = color_utils.avg_distance_colors(new_final_list, 'hsv')
-    distance_metric2 = color_utils.avg_distance_colors(new_final_list, 'lab')
-    distance_metric3 = color_utils.avg_distance_colors(new_final_list, 'cct')
-    stat = [[os.path.basename(stat_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
-            [os.path.basename(stat_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric2)],
-            [os.path.basename(stat_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_CCT, str(distance_metric3)]]
-    global_utils.write_to_stat_fh(stat_fh, stat[0])
-    global_utils.write_to_stat_fh(stat_fh, stat[1])
-    global_utils.write_to_stat_fh(stat_fh, stat[2])
-    stat_fh.close()
+    calculate_stats(new_final_list, stat_file_name)
 
-
-def analyze_individual(full_file_name, foldername, output_dir):
+def analyze_individual(dirs):
     '''
-    :param full_file_name: the full relative path of the image
-    :param foldername: the folder for the output
-    :param output_dir: the output directory
-    :return: none but creates stats and image
+    make a tmp stat and an image file for a given input
+    :param dirs: the dirs structure
+    :return: nothing but makes files
     '''
-    stat_file_name = '%s_%s' % \
-                     (os.path.basename(full_file_name).split('.')[0], global_values.STAT_ENDING_TMP) # create the stat file name
-    stat_fh = open(os.path.join(output_dir, stat_file_name), 'w+') # stat file handle
+    full_file_name = dirs[0]
+    output_filename = dirs[4]
+    stat_file_name = dirs[5]
     sorted_x = actual_image_analysis(full_file_name) # do image analysis
     imOut = Image.new("RGB",
                       [global_values.number_of_colors * global_values.number_of_colors,
@@ -168,21 +184,12 @@ def analyze_individual(full_file_name, foldername, output_dir):
             current_split = current[0].split('-')
             pixels[x, y] = (int(current_split[0]), int(current_split[1]), int(current_split[2]))
         count += 1
-    imOut.save(foldername + '.png')
+    imOut.save(output_filename)
     new_sorted_x = []
     for el in sorted_x[:global_values.number_of_colors]:
         new_sorted_x.append(el[0])
-    # This is to write stats
-    distance_metric1 = color_utils.avg_distance_colors(new_sorted_x, 'hsv')
-    distance_metric2 = color_utils.avg_distance_colors(new_sorted_x, 'lab')
-    distance_metric3 = color_utils.avg_distance_colors(new_sorted_x, 'cct')
-    stat = [[os.path.basename(full_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
-            [os.path.basename(full_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)],
-            [os.path.basename(full_file_name).split('.')[0], global_values.DISTANCE_METRIC_TAG_CCT, str(distance_metric3)]]
-    global_utils.write_to_stat_fh(stat_fh, stat[0])
-    global_utils.write_to_stat_fh(stat_fh, stat[1])
-    global_utils.write_to_stat_fh(stat_fh, stat[2])
-    stat_fh.close()
+    calculate_stats(new_sorted_x, stat_file_name)
+
 
 
 

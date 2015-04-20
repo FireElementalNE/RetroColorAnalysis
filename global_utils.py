@@ -3,6 +3,26 @@ import os
 import global_values
 from random import randint
 
+# dirs
+# input directory
+# output directory
+
+def dirs_map(full_file_name, game_name):
+    dirs = []
+    dirs.append(full_file_name) #0
+    dirs.append(game_name) # 1
+    dirs.append(get_input_directory(game_name)) # 2
+    dirs.append(get_output_directory(game_name)) # 3
+    dirs.append(output_to_input(full_file_name,
+                                get_output_directory(game_name), 'png')) # 4
+    dirs.append(output_to_input(full_file_name,
+                                get_output_directory(game_name), global_values.STAT_ENDING_TMP)) # 5
+    dirs.append(get_agg_color_stats_file(game_name)) # 6
+    dirs.append(os.path.join(get_base_dir(game_name), 'out_aggregate.png')) # 7
+    dirs.append(get_base_dir(game_name))
+    dirs.append(get_individual_stats_file(game_name))
+
+    return dirs
 
 def get_input_directory(game_name):
     '''
@@ -12,6 +32,10 @@ def get_input_directory(game_name):
     '''
     return os.path.join(global_values.MAPS_DIR, game_name, global_values.INPUT_DIR)
 
+def output_to_input(full_file_name, output_dir, ending):
+    filename_base = os.path.basename(full_file_name).split('.')[0]
+    filename_output = '%s_out.%s' % (filename_base, ending)
+    return os.path.join(output_dir, filename_output)
 
 def get_output_directory(game_name):
     '''
@@ -119,7 +143,10 @@ def check_input(target_name, arg_type):
     :param arg_type: output or input
     :return: tuple of truth value an games that match
     '''
-    target_list = [dir_name for dir_name in os.listdir(global_values.MAPS_DIR) if os.path.isdir(os.path.join(global_values.MAPS_DIR, dir_name))]
+    target_list = []
+    for dir_name in os.listdir(global_values.MAPS_DIR):
+        if os.path.isdir(os.path.join(global_values.MAPS_DIR, dir_name)):
+            target_list.append(dir_name)
     if arg_type == global_values.INPUT_MODE:
         return [target_name in target_list, target_list]
     elif arg_type == global_values.OUTPUT_MODE:

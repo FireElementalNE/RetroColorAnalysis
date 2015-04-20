@@ -11,7 +11,7 @@ def build_html(game_name):
     '''
     arg_check = global_utils.check_input(game_name, global_values.HTML_MODE)
     if arg_check[0]:
-        stuff = ImgResult(game_name)
+        ImgResult(game_name)
     else:
         sys.stdout.write('Bad args. Must be one of:\n')
         for game in arg_check[1]:

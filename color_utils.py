@@ -242,6 +242,12 @@ def avg_distance_colors(color_list, t):
     elif t == 'cct':
         cct_list = convert_cct_list(color_list)
         return avg_of_list(cct_list)
+    elif t == 'cct_max':
+        cct_list = convert_cct_list(color_list)
+        return max(cct_list)
+    elif t == 'cct_min':
+        cct_list = convert_cct_list(color_list)
+        return min(cct_list)
 
 
 
