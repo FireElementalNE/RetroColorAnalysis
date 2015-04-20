@@ -61,9 +61,9 @@ def avg_color_list(list):
 
 def actual_image_analysis(full_file_name):
     '''
-    Does the actual pi
-    :param full_file_name:
-    :return:
+    Does the actual pixel analysis
+    :param full_file_name: the filename
+    :return: the list of most common colors
     '''
     original = Image.open(full_file_name).convert('RGB')
     hash_list = {}
