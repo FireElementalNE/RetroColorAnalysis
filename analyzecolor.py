@@ -6,6 +6,8 @@ import global_values
 import global_utils
 import color_utils
 
+# TODO: use lab color distance from pure red and pure blue possibly?
+# Maybe use hexagon distance (from 6 main colors, red blue yellow orandge purple green)
 
 def test_white(pixel):
     '''
