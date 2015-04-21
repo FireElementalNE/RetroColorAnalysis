@@ -102,7 +102,7 @@ def calculate_stats(final_list, stat_file_name):
     stat = [[os.path.basename(stat_file_name).split('.')[0],
              global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
             [os.path.basename(stat_file_name).split('.')[0],
-             global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric2)],
+             global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)],
             [os.path.basename(stat_file_name).split('.')[0],
              global_values.DISTANCE_METRIC_TAG_CCT, str(distance_metric3)],
             [os.path.basename(stat_file_name).split('.')[0],
