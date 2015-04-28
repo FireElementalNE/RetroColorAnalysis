@@ -6,6 +6,8 @@ import global_values
 import global_utils
 import color_utils
 
+# TODO: use lab color distance from pure red and pure blue possibly?
+# Maybe use hexagon distance (from 6 main colors, red blue yellow orandge purple green)
 
 def test_white(pixel):
     '''
@@ -102,7 +104,7 @@ def calculate_stats(final_list, stat_file_name):
     stat = [[os.path.basename(stat_file_name).split('.')[0],
              global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
             [os.path.basename(stat_file_name).split('.')[0],
-             global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric2)],
+             global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)],
             [os.path.basename(stat_file_name).split('.')[0],
              global_values.DISTANCE_METRIC_TAG_CCT, str(distance_metric3)],
             [os.path.basename(stat_file_name).split('.')[0],
