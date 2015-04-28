@@ -8,6 +8,10 @@ import math
 
 # http://www.ams.com/kor/content/download/251586/993227/version/2 more color temp
 
+# CIELAB Stuff
+# h = atan2(b, a)
+# C = sqrt( a^2 + b^2 )
+
 def rgb_to_cie(r, g, b):
     '''
     convert rgb to cie
@@ -60,7 +64,8 @@ def rgb_to_cct(r, g, b):
     cct = (449 * pow(n,3)) + (3525 * pow(n,2)) + (6823.3 * n) + 5520.33
     return cct
 
-def rgb2lab(r, g, b):
+
+def rgb_to_lab(r, g, b):
     '''
     converts rgb to lab color space
     http://stackoverflow.com/a/16020102
@@ -177,7 +182,7 @@ def convert_lab_list(rgb_list):
     lab_list = []
     for color in rgb_list:
         el = color.split('-')
-        lab_list.append(rgb2lab(int(el[0]), int(el[1]), int(el[2])))
+        lab_list.append(rgb_to_lab(int(el[0]), int(el[1]), int(el[2])))
     return lab_list
 
 
