@@ -1,6 +1,6 @@
 __author__ = 'fire'
-import global_values
-import global_utils
+import globals.global_values as global_values
+import globals.global_utils as global_utils
 import os
 import re
 

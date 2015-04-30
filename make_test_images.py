@@ -1,8 +1,8 @@
 from PIL import Image
 import os
 import argparse
-import global_utils
-import global_values
+import globals.global_values as global_values
+import globals.global_utils as global_utils
 
 def run_main(num):
     '''

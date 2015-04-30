@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # import colorsys could also use this
 import math
-from global_utils import euclid
+from globals.global_utils import euclid
 # TODO: Switch to LAB color space instead of HSV
 # TODO: think of better multiple metrics:
 # Warmness, coldness, closeness to each other, clustering

@@ -2,10 +2,10 @@ __author__ = 'fire'
 from PIL import Image
 import operator
 import os
-import global_values
-import global_utils
+import globals.global_values as global_values
+import globals.global_utils as global_utils
 import color_utils
-from distance_matrix import DMatrix
+from dendrograms.distance_matrix import DMatrix
 # TODO: use lab color distance from pure red and pure blue possibly?
 # Maybe use hexagon distance (from 6 main colors, red blue yellow orandge purple green)
 

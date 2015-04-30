@@ -1,6 +1,6 @@
 __author__ = 'fire'
-import global_utils
-import global_values
+import globals.global_values as global_values
+import globals.global_utils as global_utils
 import sys
 from result_class import ImgResult
 

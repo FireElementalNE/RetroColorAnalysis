@@ -1,8 +1,8 @@
 from scipy.cluster.hierarchy import dendrogram, linkage
 import numpy
 import matplotlib.pyplot as plt
-from global_utils import euclid
-import global_values
+from globals.global_utils import euclid
+import globals.global_values as global_values
 import os
 class DMatrix:
     def __init__(self, cl, _dirs, _is_agg):

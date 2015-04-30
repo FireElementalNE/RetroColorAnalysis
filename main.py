@@ -2,13 +2,13 @@ __author__ = 'fire'
 import os
 import argparse
 import multiprocessing
-from analyzecolor import analyze_individual
-from analyzecolor import analyze_outputs
-import global_values
-import global_utils
+from color_tests.analyzecolor import analyze_individual
+from color_tests.analyzecolor import analyze_outputs
+import globals.global_values as global_values
+import globals.global_utils as global_utils
 import sys
 from remove_thumbs import remove_all_thumbs
-import html_builder
+import html_builder.html_builder as html_builder
 import time
 
 # TODO: Pidgen hole how close colors are (are there alot of complimentary colors? similar (analagous) colors? cool, warm? satuarion?)

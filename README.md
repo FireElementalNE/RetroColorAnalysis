@@ -4,6 +4,7 @@ Retro Color Analysis
 By FireElementalNE
 
 This program is made to analyze old game maps for color information.  
+In reality you can analyze any set of images. 
 
 ```
 usage: main.py [-h] [-i INPUT] [-o OUTPUT] [-a] [-t] [-H HTML]
@@ -20,8 +21,16 @@ optional arguments:
   -t, --threaded        thread the execution
   -H HTML, --Html HTML  build html file
 ```
+The correct progression is using the -i argument on one  
+run the -o argument on the next run and the -H argument  
+on the final run.
 
-NOTE: All arguments are marked as optional, however you mush choose either i, o or h.
+Input
+------
+The input flag searches a file directory (within the *maps* directory) that  
+matches the given input. When it is found each image within that directory  
+is analyzed for color infomation. The a certain number of colors are selected  
+(which is configurable in global_values.py
 
 **NOTE:** The -t option and the -a option do nothing (works in progress)
 
