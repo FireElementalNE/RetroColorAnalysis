@@ -1,5 +1,2 @@
 [color_aggregate]:=:HSV Distance: 0.354100380296
-[color_aggregate]:=:HSV Distance: 16.2573609609
-[color_aggregate]:=:Average CCT: 7082.77505563
-[color_aggregate]:=:MAX CCT: 11489.6253858
-[color_aggregate]:=:MIN CCT: 3694.27121905
+[color_aggregate]:=:LAB Distance: 16.2573609609

@@ -1,69 +1,12 @@
 #!/usr/bin/python
 # import colorsys could also use this
 import math
-
+from global_utils import euclid
 # TODO: Switch to LAB color space instead of HSV
 # TODO: think of better multiple metrics:
 # Warmness, coldness, closeness to each other, clustering
 
 # http://www.ams.com/kor/content/download/251586/993227/version/2 more color temp
-
-# CIELAB Stuff
-# h = atan2(b, a)
-# C = sqrt( a^2 + b^2 )
-
-def rgb_to_cie(r, g, b):
-    '''
-    convert rgb to cie
-    http://en.wikipedia.org/wiki/CIE_1931_color_space
-    :param r: red channel
-    :param g: green channel
-    :param b:  blue channel
-    :return: the cie space of the RGB
-    '''
-    x = ( -0.14282 * r ) + ( 1.54924 * g ) + ( -0.95641 * b)
-    y = ( -0.32466 * r ) + ( 1.57837 * g ) + ( -0.73191 * b)
-    z = ( -0.68202 * r ) + ( 0.77073 * g ) + ( 0.563320 * b)
-    return [x, y, z]
-
-def normalize_chromacity(x, y, z):
-    '''
-    http://dsp.stackexchange.com/a/8968
-    :param x: x
-    :param y: y
-    :param z: z
-    :return: the normalized chomacity of x and y
-    '''
-    x_prime = x / (x + y + z)
-    y_prime = y / (x + y + z)
-    return [x_prime, y_prime, z]
-
-
-def calc_n(x, y):
-    '''
-    http://dsp.stackexchange.com/a/8968
-    calculates n
-    :param x:  x
-    :param y:  y
-    :return:
-    '''
-    return (x - 0.3320) / (0.1858 - y)
-
-def rgb_to_cct(r, g, b):
-    '''
-    converts rgb to cct
-    http://dsp.stackexchange.com/a/8968
-    :param r: red channel
-    :param g: green channel
-    :param b:  blue channel
-    :return: cct representation of the giben rgb
-    '''
-    x, y, z = rgb_to_cie(r, g, b)
-    x_prime, y_prime, z = normalize_chromacity(x, y, z)
-    n = calc_n(x_prime, y_prime)
-    cct = (449 * pow(n,3)) + (3525 * pow(n,2)) + (6823.3 * n) + 5520.33
-    return cct
-
 
 def rgb_to_lab(r, g, b):
     '''
@@ -149,17 +92,6 @@ def rgb_to_hsv(r, g, b):
     return [h, s, v]
 
 
-def euclid(x1, y1, z1, x2, y2, z2):
-    '''
-    calculates the euclidean distance in a 3D space
-    between two points
-    '''
-    x_prime = pow(x2 - x1, 2)
-    y_prime = pow(y2 - y1, 2)
-    z_prime = pow(z2 - z1, 2)
-    return math.sqrt(x_prime + y_prime + z_prime)
-
-
 def avg_of_list(lst):
     '''
     returns average of a list
@@ -199,19 +131,6 @@ def convert_hsv_list(rgb_list):
         hsv_list.append(rgb_to_hsv(int(el[0]), int(el[1]), int(el[2])))
     return hsv_list
 
-def convert_cct_list(rgb_list):
-    '''
-    converts all rbg values in a list
-    to cct
-    :param rgb_list: rbg list
-    :return: cct list
-    '''
-    cct_list = []
-    for color in rgb_list:
-        el = color.split('-')
-        cct_list.append(rgb_to_cct(int(el[0]), int(el[1]), int(el[2])))
-    return cct_list
-
 def avg_distance_colors(color_list, t):
     '''
     :param color_list: a list of rgb colors
@@ -244,15 +163,6 @@ def avg_distance_colors(color_list, t):
                     distance_list.append(d)
             final_distance_list.append(avg_of_list(distance_list))
         return avg_of_list(final_distance_list)
-    elif t == 'cct':
-        cct_list = convert_cct_list(color_list)
-        return avg_of_list(cct_list)
-    elif t == 'cct_max':
-        cct_list = convert_cct_list(color_list)
-        return max(cct_list)
-    elif t == 'cct_min':
-        cct_list = convert_cct_list(color_list)
-        return min(cct_list)
 
 
 

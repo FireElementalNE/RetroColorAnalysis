@@ -5,7 +5,7 @@ import os
 import global_values
 import global_utils
 import color_utils
-
+from distance_matrix import DMatrix
 # TODO: use lab color distance from pure red and pure blue possibly?
 # Maybe use hexagon distance (from 6 main colors, red blue yellow orandge purple green)
 
@@ -98,23 +98,32 @@ def calculate_stats(final_list, stat_file_name):
     stat_fh = open(stat_file_name, 'w+')
     distance_metric1 = color_utils.avg_distance_colors(final_list, 'hsv')
     distance_metric2 = color_utils.avg_distance_colors(final_list, 'lab')
-    distance_metric3 = color_utils.avg_distance_colors(final_list, 'cct')
-    distance_metric4 = color_utils.avg_distance_colors(final_list, 'cct_max')
-    distance_metric5 = color_utils.avg_distance_colors(final_list, 'cct_min')
     stat = [[os.path.basename(stat_file_name).split('.')[0],
              global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
             [os.path.basename(stat_file_name).split('.')[0],
-             global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)],
-            [os.path.basename(stat_file_name).split('.')[0],
-             global_values.DISTANCE_METRIC_TAG_CCT, str(distance_metric3)],
-            [os.path.basename(stat_file_name).split('.')[0],
-             global_values.DISTANCE_METRIC_TAG_CCT_MAX, str(distance_metric4)],
-            [os.path.basename(stat_file_name).split('.')[0],
-             global_values.DISTANCE_METRIC_TAG_CCT_MIN, str(distance_metric5)]]
+             global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)]]
     for x in stat:
         global_utils.write_to_stat_fh(stat_fh,x)
     stat_fh.close()
 
+
+def make_d_matrix(sorted_color_list, dirs, is_agg):
+    '''
+    Make dendrogram
+    :param sorted_color_list: a list of colors for the dendrogram
+    :param dirs: the dirs array
+    :return: nothing but makes dendrogram file
+    '''
+    rgb_lab_dict = {}
+    for color in sorted_color_list:
+        tmp = color.split('-')
+        r = int(tmp[0])
+        g = int(tmp[1])
+        b = int(tmp[2])
+        rgb_lab_dict[color] = color_utils.rgb_to_lab(r, g, b)
+    dmatrix = DMatrix(rgb_lab_dict, dirs, is_agg)
+    dmatrix.compute_table()
+    dmatrix.cluster_samples()
 
 
 def analyze_outputs(dirs):
@@ -128,7 +137,7 @@ def analyze_outputs(dirs):
     counter = 0
     for root, dirnames, filenames in os.walk(output_dir):
         for filename in filenames:
-            if filename.endswith('png'):
+            if filename.endswith('png') and 'dendrogram' not in filename:
                 all_colors.append(actual_image_analysis(os.path.join(output_dir, filename)))
                 counter += 1
     final_list = []
@@ -158,6 +167,7 @@ def analyze_outputs(dirs):
     for el in final_list:
         z = '-'.join([str(x) for x in el])
         new_final_list.append(z)
+    make_d_matrix(new_final_list, dirs, True)
     calculate_stats(new_final_list, stat_file_name)
 
 def analyze_individual(dirs):
@@ -170,6 +180,7 @@ def analyze_individual(dirs):
     output_filename = dirs[4]
     stat_file_name = dirs[5]
     sorted_x = actual_image_analysis(full_file_name) # do image analysis
+
     imOut = Image.new("RGB",
                       [global_values.number_of_colors * global_values.number_of_colors,
                        global_values.number_of_colors],
@@ -191,6 +202,15 @@ def analyze_individual(dirs):
     for el in sorted_x[:global_values.number_of_colors]:
         new_sorted_x.append(el[0])
     calculate_stats(new_sorted_x, stat_file_name)
+
+    d_gram_sorted_x = []
+    actual_dgram_num = global_values.D_GRAM_NUMBER
+    if global_values.D_GRAM_NUMBER >= len(sorted_x): # if we have less colors than are required
+        actual_dgram_num = len(sorted_x)
+    for el in sorted_x[:actual_dgram_num]:
+        d_gram_sorted_x.append(el[0])
+    make_d_matrix(d_gram_sorted_x, dirs, False)
+
 
 
 

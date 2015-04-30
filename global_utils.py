@@ -1,3 +1,5 @@
+import math
+
 __author__ = 'fire'
 import os
 import global_values
@@ -174,6 +176,15 @@ def get_games_list():
 def print_run_main_error():
     print 'cannot directly use this file'
 
+def euclid(x1, y1, z1, x2, y2, z2):
+    '''
+    calculates the euclidean distance in a 3D space
+    between two points
+    '''
+    x_prime = pow(x2 - x1, 2)
+    y_prime = pow(y2 - y1, 2)
+    z_prime = pow(z2 - z1, 2)
+    return math.sqrt(x_prime + y_prime + z_prime)
 
 if __name__ == "__main__":
     print_run_main_error()

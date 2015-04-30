@@ -8,6 +8,7 @@
 		<link href="../../HTML_STATIC/CSS/style.css" rel="stylesheet" >
 		<script src="../../HTML_STATIC/Javascript/libs/jquery.min.js" ></script>
 		<script src="../../HTML_STATIC/Javascript/libs/bootstrap.min.js" ></script>
+		<script src="../../HTML_STATIC/Javascript/script.js" ></script>
 	</head>
 	<body>
 		<div class="container" >
@@ -31,355 +32,17 @@
 				<div class="col-sm-4" >
 					<h3>Stats</h3>
 					<p>HSV Distance: 0.354100380296</p>
-					<p>HSV Distance: 16.2573609609</p>
-					<p>Average CCT: 7082.77505563</p>
-					<p>MAX CCT: 11489.6253858</p>
-					<p>MIN CCT: 3694.27121905</p>
+					<p>LAB Distance: 16.2573609609</p>
 				</div>
 			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>19-test-out.png</h2>
+			<div class="col-sm-12" >
+				<div class="row" >
+					<h2 onclick="slideit($('#agg_dendrogram'))" >View Dendrogram (click here)</h2>
 				</div>
 			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\19-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\19-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.56790158534</p>
-					<p>HSV Distance: 91.7943018759</p>
-					<p>Average CCT: 4333.42046022</p>
-					<p>MAX CCT: 12546.6643624</p>
-					<p>MIN CCT: 1683.93381128</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>3-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\3-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\3-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.492549251303</p>
-					<p>HSV Distance: 94.6628682017</p>
-					<p>Average CCT: -42711.5787361</p>
-					<p>MAX CCT: 5456.29737207</p>
-					<p>MIN CCT: -458699.039521</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>0-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\0-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\0-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.60200958221</p>
-					<p>HSV Distance: 86.3477424637</p>
-					<p>Average CCT: 240006.749236</p>
-					<p>MAX CCT: 2333453.74355</p>
-					<p>MIN CCT: 1924.75359861</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>9-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\9-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\9-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.688453183683</p>
-					<p>HSV Distance: 74.4318337559</p>
-					<p>Average CCT: 7571.20665396</p>
-					<p>MAX CCT: 33215.8907141</p>
-					<p>MIN CCT: 1629.12068767</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>6-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\6-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\6-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.479529919158</p>
-					<p>HSV Distance: 83.8939086163</p>
-					<p>Average CCT: 942688.74135</p>
-					<p>MAX CCT: 9392133.2881</p>
-					<p>MIN CCT: 1637.3479543</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>11-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\11-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\11-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.467860303409</p>
-					<p>HSV Distance: 92.35639581</p>
-					<p>Average CCT: -13018860.0371</p>
-					<p>MAX CCT: 6295.08473703</p>
-					<p>MIN CCT: -130221811.986</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>8-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\8-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\8-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.546495859343</p>
-					<p>HSV Distance: 68.6675362448</p>
-					<p>Average CCT: 6562.51120328</p>
-					<p>MAX CCT: 18451.1506864</p>
-					<p>MIN CCT: 2844.99984701</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>18-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\18-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\18-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.500953113795</p>
-					<p>HSV Distance: 62.9294411708</p>
-					<p>Average CCT: 6579.60774892</p>
-					<p>MAX CCT: 66454.0361443</p>
-					<p>MIN CCT: -25567.1564483</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>1-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\1-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\1-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.555055208559</p>
-					<p>HSV Distance: 100.346614749</p>
-					<p>Average CCT: -243075.358996</p>
-					<p>MAX CCT: 34118.4754664</p>
-					<p>MIN CCT: -2497569.1829</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>17-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\17-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\17-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.522440355638</p>
-					<p>HSV Distance: 94.0119053091</p>
-					<p>Average CCT: 3894.34542192</p>
-					<p>MAX CCT: 8479.41830699</p>
-					<p>MIN CCT: 1658.46244906</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>5-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\5-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\5-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.578494660679</p>
-					<p>HSV Distance: 78.2428033891</p>
-					<p>Average CCT: 7418.95544392</p>
-					<p>MAX CCT: 40838.6840146</p>
-					<p>MIN CCT: 1784.19188176</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>13-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\13-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\13-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.569329138578</p>
-					<p>HSV Distance: 72.1952402024</p>
-					<p>Average CCT: 8031.53047074</p>
-					<p>MAX CCT: 25799.8178158</p>
-					<p>MIN CCT: 1620.29222914</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>10-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\10-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\10-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.445694722183</p>
-					<p>HSV Distance: 70.7473273452</p>
-					<p>Average CCT: -115569.509525</p>
-					<p>MAX CCT: 767961.520731</p>
-					<p>MIN CCT: -1975238.3524</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>15-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\15-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\15-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.531031480774</p>
-					<p>HSV Distance: 89.0714460303</p>
-					<p>Average CCT: 437453.991541</p>
-					<p>MAX CCT: 4263699.03933</p>
-					<p>MIN CCT: 1713.6749044</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>7-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\7-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\7-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.668500071567</p>
-					<p>HSV Distance: 71.8178212188</p>
-					<p>Average CCT: 104086.724497</p>
-					<p>MAX CCT: 971422.005952</p>
-					<p>MIN CCT: 2683.36331941</p>
+			<div class="col-sm-12" >
+				<div class="row dendrogram-row" id="agg_dendrogram" >
+					<img src="agg_dendrogram.png" />
 				</div>
 			</div>
 			<div class="row" >
@@ -399,33 +62,107 @@
 				<div class="col-sm-4" >
 					<h3>Stats</h3>
 					<p>HSV Distance: 0.555708609776</p>
-					<p>HSV Distance: 78.991137173</p>
-					<p>Average CCT: 109128.594736</p>
-					<p>MAX CCT: 1054465.62355</p>
-					<p>MIN CCT: 2443.47398283</p>
+					<p>LAB Distance: 78.991137173</p>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row" >
+					<h2 onclick="slideit($('#2-test-out'))" >View Dendrogram (click here)</h2>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row dendrogram-row" id="2-test-out" >
+					<img src="output\2-test-out_dendrogram.png" />
 				</div>
 			</div>
 			<div class="row" >
 				<div class="col-sm-12" >
-					<h2>16-test-out.png</h2>
+					<h2>3-test-out.png</h2>
 				</div>
 			</div>
 			<div class="row" >
 				<div class="col-sm-4" >
 					<h3>Image</h3>
-					<img src="input\16-test-out.png" class="img-limited" />
+					<img src="input\3-test-out.png" class="img-limited" />
 				</div>
 				<div class="col-sm-4" >
 					<h3>Top Colors</h3>
-					<img src="output\16-test-out_out.png" class="img-limited" />
+					<img src="output\3-test-out_out.png" class="img-limited" />
 				</div>
 				<div class="col-sm-4" >
 					<h3>Stats</h3>
-					<p>HSV Distance: 0.463813130529</p>
-					<p>HSV Distance: 80.120483373</p>
-					<p>Average CCT: -286785.318047</p>
-					<p>MAX CCT: 49357.2613788</p>
-					<p>MIN CCT: -2953450.50847</p>
+					<p>HSV Distance: 0.492549251303</p>
+					<p>LAB Distance: 94.6628682017</p>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row" >
+					<h2 onclick="slideit($('#3-test-out'))" >View Dendrogram (click here)</h2>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row dendrogram-row" id="3-test-out" >
+					<img src="output\3-test-out_dendrogram.png" />
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-sm-12" >
+					<h2>0-test-out.png</h2>
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-sm-4" >
+					<h3>Image</h3>
+					<img src="input\0-test-out.png" class="img-limited" />
+				</div>
+				<div class="col-sm-4" >
+					<h3>Top Colors</h3>
+					<img src="output\0-test-out_out.png" class="img-limited" />
+				</div>
+				<div class="col-sm-4" >
+					<h3>Stats</h3>
+					<p>HSV Distance: 0.60200958221</p>
+					<p>LAB Distance: 86.3477424637</p>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row" >
+					<h2 onclick="slideit($('#0-test-out'))" >View Dendrogram (click here)</h2>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row dendrogram-row" id="0-test-out" >
+					<img src="output\0-test-out_dendrogram.png" />
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-sm-12" >
+					<h2>1-test-out.png</h2>
+				</div>
+			</div>
+			<div class="row" >
+				<div class="col-sm-4" >
+					<h3>Image</h3>
+					<img src="input\1-test-out.png" class="img-limited" />
+				</div>
+				<div class="col-sm-4" >
+					<h3>Top Colors</h3>
+					<img src="output\1-test-out_out.png" class="img-limited" />
+				</div>
+				<div class="col-sm-4" >
+					<h3>Stats</h3>
+					<p>HSV Distance: 0.555055208559</p>
+					<p>LAB Distance: 100.346614749</p>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row" >
+					<h2 onclick="slideit($('#1-test-out'))" >View Dendrogram (click here)</h2>
+				</div>
+			</div>
+			<div class="col-sm-12" >
+				<div class="row dendrogram-row" id="1-test-out" >
+					<img src="output\1-test-out_dendrogram.png" />
 				</div>
 			</div>
 			<div class="row" >
@@ -445,56 +182,17 @@
 				<div class="col-sm-4" >
 					<h3>Stats</h3>
 					<p>HSV Distance: 0.466377172985</p>
-					<p>HSV Distance: 99.2383562751</p>
-					<p>Average CCT: 3562.04528295</p>
-					<p>MAX CCT: 8200.96435909</p>
-					<p>MIN CCT: 1623.21619986</p>
+					<p>LAB Distance: 99.2383562751</p>
 				</div>
 			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>12-test-out.png</h2>
+			<div class="col-sm-12" >
+				<div class="row" >
+					<h2 onclick="slideit($('#4-test-out'))" >View Dendrogram (click here)</h2>
 				</div>
 			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\12-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\12-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.488540352785</p>
-					<p>HSV Distance: 95.6844531451</p>
-					<p>Average CCT: 6159.3337411</p>
-					<p>MAX CCT: 32036.7691946</p>
-					<p>MIN CCT: 1655.30337378</p>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-12" >
-					<h2>14-test-out.png</h2>
-				</div>
-			</div>
-			<div class="row" >
-				<div class="col-sm-4" >
-					<h3>Image</h3>
-					<img src="input\14-test-out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Top Colors</h3>
-					<img src="output\14-test-out_out.png" class="img-limited" />
-				</div>
-				<div class="col-sm-4" >
-					<h3>Stats</h3>
-					<p>HSV Distance: 0.494538323841</p>
-					<p>HSV Distance: 96.2890067714</p>
-					<p>Average CCT: 33757.3810513</p>
-					<p>MAX CCT: 261510.269317</p>
-					<p>MIN CCT: 1637.01516568</p>
+			<div class="col-sm-12" >
+				<div class="row dendrogram-row" id="4-test-out" >
+					<img src="output\4-test-out_dendrogram.png" />
 				</div>
 			</div>
 				</div>
