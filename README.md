@@ -4,10 +4,12 @@ Retro Color Analysis
 By FireElementalNE
 
 This program is made to analyze old game maps for color information.  
-In reality you can analyze any set of images. 
+In reality you can analyze any set of images.   
+[retro_analysis.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/retro_analysis.py) is the main program, you can split the input, output and HTML  
+generation steps via the command line arguments. 
 
 ```
-usage: main.py [-h] [-i INPUT] [-o OUTPUT] [-a] [-t] [-H HTML]
+usage: retro_analysis.py [-h] [-i INPUT] [-o OUTPUT] [-a] [-t] [-H HTML]
 
 Old game color analyzer
 
@@ -32,18 +34,29 @@ python main.py -o test
 python main.py -H test
 ```
 
+[main.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/main.py) is a wrapper that runs all three of these tests. Used for convince and simplicity.  
+```
+usage: main.py [-h] -g GAME
+
+Wrapper function
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -g GAME, --game GAME  Game name
+```
+
 Input
 ------
 The input flag searches a file directory (within the *maps* directory) that  
 matches the given input. When this directory is found each png residing within  
-is analyzed for color infomation. 10 most common colors are selected  
+is analyzed for color information. 10 most common colors are selected  
 (which is configurable in [global_values.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/globals/global_values.py) along with many other variables) and  
 made into a color swatch.
   
 Two statistics are also calculated:    
 
-1. The average distance bewteen the top colors in [HSV](http://en.wikipedia.org/wiki/HSL_and_HSV) space  
-2. The average distance bewteen the top colors in [LAB](http://en.wikipedia.org/wiki/Lab_color_space) space
+1. The average distance between the top colors in [HSV](http://en.wikipedia.org/wiki/HSL_and_HSV) space  
+2. The average distance between the top colors in [LAB](http://en.wikipedia.org/wiki/Lab_color_space) space
 
 A [Dendrogram](http://en.wikipedia.org/wiki/Dendrogram) of the top 40 colors (which is also configured in [global_values.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/globals/global_values.py))  
 is also made. It is created from a distance matrix of the colors in LAB space.
@@ -52,12 +65,12 @@ is also made. It is created from a distance matrix of the colors in LAB space.
 Output
 ------
 Outputs from the input phase are taken as inputs to the output phase creating  
-an aggreagate result for each game folder.  
+an aggregate result for each game folder.  
 
 HTML
 -------
-The html builder takes all of the input and output data and makes a nice pretty  
-bootstrap based webpage on the fly. It holds all of the information discussed  
+The HTML builder takes all of the input and output data and makes a nice pretty  
+bootstrap based web page on the fly. It holds all of the information discussed  
 above.
 
 

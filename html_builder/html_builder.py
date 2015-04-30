@@ -11,11 +11,13 @@ def build_html(game_name):
     '''
     arg_check = global_utils.check_input(game_name, global_values.HTML_MODE)
     if arg_check[0]:
+        print 'HTML mode on %s' % game_name
         stuff = ImgResult(game_name)
     else:
         sys.stdout.write('Bad args. Must be one of:\n')
         for game in arg_check[1]:
             sys.stdout.write('\t%s\n' % game)
+    return True
 
 if __name__ == "__main__":
     global_utils.print_run_main_error()
