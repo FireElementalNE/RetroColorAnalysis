@@ -20,10 +20,10 @@ def analyze_image(game_name, arg_type, threaded):
     :return: none
     '''
     arg_check = global_utils.check_input(game_name, arg_type)
-    global_utils.check_folders(game_name)
     if (threaded):
         print 'Threaded Does not currently work.'
     if arg_check[0]:
+        global_utils.check_folders(game_name)
         threads = []
         if arg_type == global_values.INPUT_MODE:
             print 'Input mode on %s' % game_name
