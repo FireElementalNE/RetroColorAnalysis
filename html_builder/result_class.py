@@ -2,7 +2,6 @@ __author__ = 'fire'
 import globals.global_values as global_values
 import globals.global_utils as global_utils
 import os
-import re
 
 
 class ImgResult:
@@ -170,6 +169,6 @@ class ImgResult:
         self.write_tag('body', global_values.END_TAG, 1)
         self.write_tag('html', global_values.END_TAG, 0)
 
-
-
+if __name__ == "__main__":
+    global_utils.print_run_main_error()
 

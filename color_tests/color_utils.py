@@ -1,12 +1,7 @@
 #!/usr/bin/python
 # import colorsys could also use this
 import math
-from globals.global_utils import euclid
-# TODO: Switch to LAB color space instead of HSV
-# TODO: think of better multiple metrics:
-# Warmness, coldness, closeness to each other, clustering
-
-# http://www.ams.com/kor/content/download/251586/993227/version/2 more color temp
+from globals.global_utils import euclid, print_run_main_error
 
 def rgb_to_lab(r, g, b):
     '''
@@ -164,6 +159,7 @@ def avg_distance_colors(color_list, t):
             final_distance_list.append(avg_of_list(distance_list))
         return avg_of_list(final_distance_list)
 
-
+if __name__ == "__main__":
+    print_run_main_error()
 
 

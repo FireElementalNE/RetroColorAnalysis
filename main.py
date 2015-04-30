@@ -7,7 +7,6 @@ from color_tests.analyzecolor import analyze_outputs
 import globals.global_values as global_values
 import globals.global_utils as global_utils
 import sys
-from remove_thumbs import remove_all_thumbs
 import html_builder.html_builder as html_builder
 import time
 
@@ -71,7 +70,6 @@ if __name__ == "__main__":
     parser.add_argument('-t', '--threaded', action='store_true', help='thread the execution', required=False)
     parser.add_argument('-H', '--Html', help='build html file', required=False)
     args = parser.parse_args()
-    remove_all_thumbs()
     if args.output and not args.input and not args.all:
         analyze_image(args.output, global_values.OUTPUT_MODE, args.threaded)
     elif args.input and not args.output and not args.all:

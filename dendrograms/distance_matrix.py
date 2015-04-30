@@ -1,11 +1,18 @@
 from scipy.cluster.hierarchy import dendrogram, linkage
 import numpy
 import matplotlib.pyplot as plt
-from globals.global_utils import euclid
+from globals.global_utils import euclid, print_run_main_error
 import globals.global_values as global_values
 import os
 class DMatrix:
     def __init__(self, cl, _dirs, _is_agg):
+        '''
+        initialize the dmatrix
+        :param cl: the list of colors
+        :param _dirs: the dirs structure
+        :param _is_agg: flag for indicating whether output or input was run
+        :return: nothing
+        '''
         self.color_list = cl # will be a dictionary of {rgb : lab}
         self.distance_matrix = []
         self.node_order = []
@@ -13,6 +20,10 @@ class DMatrix:
         self.is_agg = _is_agg
 
     def compute_table(self):
+        '''
+        Make a proper distance matrix from the color list
+        :return: nothing
+        '''
         for color_rgb, color_lab in self.color_list.iteritems():
             tmp = []
             self.node_order.append(color_rgb)
@@ -26,6 +37,11 @@ class DMatrix:
             self.distance_matrix.append(tmp)
 
     def make_file_name(self):
+        '''
+        based on the is_agg member creates the correct filename for the
+        Dentrogram
+        :return: the filename
+        '''
         if not self.is_agg:
             base_name = os.path.basename(self.dirs[0]).split('.')[0]
             d_name = '%s_dendrogram.png' % base_name
@@ -36,6 +52,8 @@ class DMatrix:
     def cluster_samples(self):
         '''
         http://stackoverflow.com/questions/11917779/how-to-plot-and-annotate-hierarchical-clustering-dendrograms-in-scipy-matplotlib
+        Do the clustering
+        :return: nothing
         '''
         numpy_matrix = numpy.array(self.distance_matrix)
         label_array = numpy.array(self.node_order)
@@ -46,4 +64,5 @@ class DMatrix:
                    p=global_values.P, labels=label_array, orientation=global_values.ORIENTATION)
         plt.savefig(self.make_file_name())
 
-
+if __name__ == "__main__":
+    print_run_main_error()

@@ -211,7 +211,8 @@ def analyze_individual(dirs):
         d_gram_sorted_x.append(el[0])
     make_d_matrix(d_gram_sorted_x, dirs, False)
 
-
+if __name__ == "__main__":
+    global_utils.print_run_main_error()
 
 
 
