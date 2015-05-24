@@ -17,7 +17,7 @@ def analyze_image(game_name, arg_type, threaded):
     :param game_name: the name of the game folder to be analyzed
     :param arg_type: doing input or output analysis
     :param threaded: use threaded values
-    :return: none
+    :return: boolean value corresponding to success
     '''
     arg_check = global_utils.check_input(game_name, arg_type)
     if (threaded):
