@@ -6,7 +6,7 @@ By FireElementalNE
 This program is made to analyze old game maps for color information.  
 In reality you can analyze any set of images.   
 [retro_analysis.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/retro_analysis.py) is the main program, you can split the input, output and HTML  
-generation steps via the command line arguments. 
+generation steps via the command line arguments.
 
 ```
 usage: retro_analysis.py [-h] [-i INPUT] [-o OUTPUT] [-a] [-t] [-H HTML]
@@ -48,11 +48,11 @@ optional arguments:
 Input
 ------
 The input flag searches a file directory (within the *maps* directory) that  
-matches the given input. When this directory is found each png residing within  
-is analyzed for color information. 10 most common colors are selected  
+matches the given input. Each PNG Image within this directory  
+is analyzed for color information. The 10 most common colors are selected  
 (which is configurable in [global_values.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/globals/global_values.py) along with many other variables) and  
 made into a color swatch.
-  
+
 Two statistics are also calculated:    
 
 1. The average distance between the top colors in [HSV](http://en.wikipedia.org/wiki/HSL_and_HSV) space  
