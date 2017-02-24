@@ -28,6 +28,7 @@ def analyze_image(game_name, arg_type, threaded):
         if arg_type == global_values.INPUT_MODE:
             print 'Input mode on %s' % game_name
             directory_search = global_utils.get_input_directory(game_name)
+            global_utils.sanitize_filenames(directory_search)
             for root, dirnames, filenames in os.walk(directory_search):
                 for filename in filenames:
                     if not filename.endswith('db') and not filename.endswith(global_values.STAT_ENDING_TMP):

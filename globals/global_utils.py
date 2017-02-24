@@ -186,5 +186,21 @@ def euclid(x1, y1, z1, x2, y2, z2):
     z_prime = pow(z2 - z1, 2)
     return math.sqrt(x_prime + y_prime + z_prime)
 
+def sanitize_filenames(root_dir):
+    """
+    sanitizes all the filenames so that the javascript will not mess up
+    :param root_dir: the root directory
+    :return: nothing
+    """
+    for root, dirnames, filenames in os.walk(root_dir):
+        for filename in filenames:
+            if not filename.endswith('db') and not filename.endswith(global_values.STAT_ENDING_TMP):
+                old_full_file_name = os.path.join(root_dir, filename)
+                filename = filename.replace("'", '').replace('"', '').replace(' ','_')
+                new_full_file_name = os.path.join(root_dir, filename)
+                print 'Sanitizing %s into %s' % (old_full_file_name, new_full_file_name)
+                os.rename(old_full_file_name, new_full_file_name)
+
+
 if __name__ == "__main__":
     print_run_main_error()

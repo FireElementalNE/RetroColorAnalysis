@@ -131,6 +131,8 @@ class ImgResult:
         self.write_tag('div', global_values.END_TAG, 3)
         for key in self.input_file_dict.keys():
             if key.endswith('.png'):
+                key = key.replace("'", '')
+                key = key.replace('"', '')
                 self.write_to_fh_simple('div', {'class': 'row'}, None, 3, False)
                 self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 4, False)
                 self.write_to_fh_simple('h2', {}, key, 5, True)
