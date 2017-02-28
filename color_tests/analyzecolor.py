@@ -5,6 +5,7 @@ import os
 import globals.global_values as global_values
 import globals.global_utils as global_utils
 import color_utils
+import sys
 from dendrograms.distance_matrix import DMatrix
 # TODO: use lab color distance from pure red and pure blue possibly?
 # Maybe use hexagon distance (from 6 main colors, red blue yellow orandge purple green)
@@ -109,19 +110,28 @@ def calculate_stats(final_list, stat_file_name):
 
 def make_d_matrix(sorted_color_list, dirs, is_agg):
     '''
-    Make dendrogram
+    Make dendrogram, uses either LAB, HSV or RGB values to create
+    distance matrix
     :param sorted_color_list: a list of colors for the dendrogram
     :param dirs: the dirs array
     :return: nothing but makes dendrogram file
     '''
-    rgb_lab_dict = {}
+    rgb_val_dict = {}
     for color in sorted_color_list:
         tmp = color.split('-')
         r = int(tmp[0])
         g = int(tmp[1])
         b = int(tmp[2])
-        rgb_lab_dict[color] = color_utils.rgb_to_lab(r, g, b)
-    dmatrix = DMatrix(rgb_lab_dict, dirs, is_agg)
+        if global_values.DISTANCE_TYPE == 'LAB':
+            rgb_val_dict[color] = color_utils.rgb_to_lab(r, g, b)
+        elif global_values.DISTANCE_TYPE == 'HSV':
+            rgb_val_dict[color] = color_utils.rgb_to_hsv(r, g, b)
+        elif global_values.DISTANCE_TYPE == 'RGB':
+            rgb_val_dict[color] = [r, g, b]
+        else:
+            print 'Incorrect setting in globals.DISTANCE_TYPE: ', global_values.DISTANCE_TYPE
+            sys.exit(0)
+    dmatrix = DMatrix(rgb_val_dict, dirs, is_agg)
     dmatrix.compute_table()
     dmatrix.cluster_samples()
 

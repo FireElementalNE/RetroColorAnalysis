@@ -59,7 +59,8 @@ Two statistics are also calculated:
 2. The average distance between the top colors in [LAB](http://en.wikipedia.org/wiki/Lab_color_space) space
 
 A [Dendrogram](http://en.wikipedia.org/wiki/Dendrogram) of the top 40 colors (which is also configured in [global_values.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/globals/global_values.py))  
-is also made. It is created from a distance matrix of the colors in LAB space.
+is also made. The distance matrix that is used to create the Dendrogram can be created using the values  
+of the colors in RGB, HSV or LAB space (this is configurable in [global_values.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/globals/global_values.py)).
 
 
 Output

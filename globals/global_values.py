@@ -25,6 +25,7 @@ JQUERY_JS = '../../HTML_STATIC/Javascript/libs/jquery.min.js' # for html imports
 BOOTSTRAP_SCRIPT_JS = '../../HTML_STATIC/Javascript/libs/bootstrap.min.js' # for html imports
 SCRIPT_JS = '../../HTML_STATIC/Javascript/script.js' # for html imports
 
+DISTANCE_TYPE = 'HSV' # The color space the dengrams use to calculate distance (Can be RGB, LAB or HSV)
 
 STATS_FILENAME = 'color.statistics' # the combined color statistics file (not aggregated)
 STATS_FILENAME_AGG = 'color_aggregate.statistics' # the aggregated stats file

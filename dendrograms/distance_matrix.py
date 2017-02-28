@@ -13,7 +13,7 @@ class DMatrix:
         :param _is_agg: flag for indicating whether output or input was run
         :return: nothing
         '''
-        self.color_list = cl # will be a dictionary of {rgb : lab}
+        self.color_list = cl # will be a dictionary of {rgb : (hsv, lab, or rbg)}
         self.distance_matrix = []
         self.node_order = []
         self.dirs = _dirs
@@ -24,15 +24,15 @@ class DMatrix:
         Make a proper distance matrix from the color list
         :return: nothing
         '''
-        for color_rgb, color_lab in self.color_list.iteritems():
+        for color_rgb, color_values in self.color_list.iteritems():
             tmp = []
             self.node_order.append(color_rgb)
-            for color_rgb_test, color_lab_test in self.color_list.iteritems():
-                if color_rgb_test == color_rgb and color_lab_test == color_lab:
+            for color_rgb_test, color_values_test in self.color_list.iteritems():
+                if color_rgb_test == color_rgb and color_values_test == color_values:
                     tmp.append(0.0)
                 else:
-                    distance = euclid(color_lab[0], color_lab[1], color_lab[2],
-                                      color_lab_test[0], color_lab_test[1], color_lab_test[2])
+                    distance = euclid(color_values[0], color_values[1], color_values[2],
+                                      color_values_test[0], color_values_test[1], color_values_test[2])
                     tmp.append(distance)
             self.distance_matrix.append(tmp)
 
@@ -55,11 +55,22 @@ class DMatrix:
         Do the clustering
         :return: nothing
         '''
+        title = os.path.basename(self.dirs[0]).split('.')[0]
+        if title != '':
+            title = title + ' - '
+        if global_values.DISTANCE_TYPE == 'LAB':
+            title = title + 'LAB'
+        elif global_values.DISTANCE_TYPE == 'HSV':
+            title = title + 'HSV'
+        elif global_values.DISTANCE_TYPE == 'RGB':
+            title = title + 'RGB'
+        else:
+            title = title + '???'
         numpy_matrix = numpy.array(self.distance_matrix)
         label_array = numpy.array(self.node_order)
         linked = linkage(numpy_matrix, method='single')
         plt.figure(figsize=global_values.FIGURE_SIZE)
-        plt.title(os.path.basename(self.dirs[0]).split('.')[0])
+        plt.title(title)
         dendrogram(linked, truncate_mode=global_values.TRUNCATE_MODE,
                    p=global_values.P, labels=label_array, orientation=global_values.ORIENTATION)
         plt.savefig(self.make_file_name())
