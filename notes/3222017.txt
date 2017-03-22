@@ -1,0 +1,17 @@
+Color Psychology:
+	- Equations: (examples like "RGB -> Stress level")
+	- http://onlinelibrary.wiley.com/doi/10.1002/col.20208/abstract
+	- http://onlinelibrary.wiley.com/doi/10.1002/col.20010/full
+	- Why is Kirby not stressful
+	- Why is Castlevanie _very_ stressful
+	- Why is Vermintide amazing?
+
+Clustering games by color metrics:
+	- Look to https://gamecip.soe.ucsc.edu/projects!
+	- use multiple metrics to cluster games in an n-dimensional space
+
+House Keeping:
+	- Clean up code
+	- add more comments
+	- use existing code as a component to larger code base
+
