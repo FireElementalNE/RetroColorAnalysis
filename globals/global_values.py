@@ -17,6 +17,8 @@ HTML_MODE = 3 # run in html mode
 START_TAG = 50 # flags for tags in html
 END_TAG = 51 # flags for tags in html
 
+MAX_SCATTER_POINTS = 10 # the number of scatter points to use
+
 THUMBS_FILENAME = 'Thumbs.db' # annoying stuff
 
 BOOTSTRAP_CSS = '../../HTML_STATIC/CSS/libs/bootstrap.min.css' # for html imports

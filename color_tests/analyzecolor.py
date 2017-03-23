@@ -6,6 +6,7 @@ import globals.global_values as global_values
 import globals.global_utils as global_utils
 import color_utils
 import sys
+from scatterplots.scatter_plot import ScatterPlot
 from dendrograms.distance_matrix import DMatrix
 # TODO: use lab color distance from pure red and pure blue possibly?
 # Maybe use hexagon distance (from 6 main colors, red blue yellow orandge purple green)
@@ -79,7 +80,7 @@ def actual_image_analysis(full_file_name):
             else:
                 keyStr = '%d-%d-%d' % (r, g, b)
                 if keyStr not in hash_list.keys():
-                    hash_list[keyStr] = 0
+                    hash_list[keyStr] = 1
                 else:
                     hash_list[keyStr] += 1
 
@@ -106,6 +107,32 @@ def calculate_stats(final_list, stat_file_name):
     for x in stat:
         global_utils.write_to_stat_fh(stat_fh,x)
     stat_fh.close()
+
+
+def make_scatter_plot(all_color_list, dirs):
+    '''
+    create a scatter plot
+    :param all_color_list: a list of colors for the scatter plot
+    :param dirs: the dirs array
+    :return: nothing but makes the scatter plot
+    '''
+    rgb_val_dict = {}
+    for color in all_color_list:
+        tmp = color.split('-')
+        r = int(tmp[0])
+        g = int(tmp[1])
+        b = int(tmp[2])
+        if global_values.DISTANCE_TYPE == 'LAB':
+            rgb_val_dict[color] = color_utils.rgb_to_lab(r, g, b)
+        elif global_values.DISTANCE_TYPE == 'HSV':
+            rgb_val_dict[color] = color_utils.rgb_to_hsv(r, g, b)
+        elif global_values.DISTANCE_TYPE == 'RGB':
+            rgb_val_dict[color] = [r, g, b]
+        else:
+            print 'Incorrect setting in globals.DISTANCE_TYPE: ', global_values.DISTANCE_TYPE
+            sys.exit(0)
+        splot = ScatterPlot(rgb_val_dict, dirs)
+        splot.make_scatter_plot()
 
 
 def make_d_matrix(sorted_color_list, dirs, is_agg):
@@ -183,6 +210,7 @@ def analyze_outputs(dirs):
 def analyze_individual(dirs):
     '''
     make a tmp stat and an image file for a given input
+    also creates scatter plot
     :param dirs: the dirs structure
     :return: nothing but makes files
     '''
@@ -190,7 +218,10 @@ def analyze_individual(dirs):
     output_filename = dirs[4]
     stat_file_name = dirs[5]
     sorted_x = actual_image_analysis(full_file_name) # do image analysis
-
+    scatter_list = []
+    for el in sorted_x[:global_values.MAX_SCATTER_POINTS]:
+        scatter_list.append(el[0])
+    make_scatter_plot(scatter_list, dirs)
     imOut = Image.new("RGB",
                       [global_values.number_of_colors * global_values.number_of_colors,
                        global_values.number_of_colors],
@@ -209,6 +240,7 @@ def analyze_individual(dirs):
         count += 1
     imOut.save(output_filename)
     new_sorted_x = []
+
     for el in sorted_x[:global_values.number_of_colors]:
         new_sorted_x.append(el[0])
     calculate_stats(new_sorted_x, stat_file_name)
