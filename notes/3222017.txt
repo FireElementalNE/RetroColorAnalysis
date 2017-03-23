@@ -15,3 +15,7 @@ House Keeping:
 	- add more comments
 	- use existing code as a component to larger code base
 
+PS-NOTE:
+
+	- ADD 3D plot for RGB HSV and LAB points
+		-> http://matplotlib.org/mpl_toolkits/mplot3d/tutorial.html
