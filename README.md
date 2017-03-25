@@ -9,7 +9,7 @@ In reality you can analyze any set of images.
 generation steps via the command line arguments.
 
 ```
-usage: retro_analysis.py [-h] [-i INPUT] [-o OUTPUT] [-a] [-t] [-H HTML]
+usage: retro_analysis.py [-h] [-i INPUT] [-t]
 
 Old game color analyzer
 
@@ -17,24 +17,11 @@ optional arguments:
   -h, --help            show this help message and exit
   -i INPUT, --input INPUT
                         Input Folder (individual game)
-  -o OUTPUT, --output OUTPUT
-                        analyze outputs Folder (aggregate results)
-  -a, --all             do it all
   -t, --threaded        thread the execution
-  -H HTML, --Html HTML  build html file
 ```
-**NOTE:** The -t option and the -a option do nothing (works in progress)
+**NOTE:** The -t option does nothing (work in progress)
 
-The -i flag must be run before the -o flag which must be run  
-before the -H flag.  
-EXAMPLE:  
-```
-python main.py -i test
-python main.py -o test
-python main.py -H test
-```
-
-[main.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/main.py) is a wrapper that runs all three of these tests. Used for convince and simplicity.  
+[main.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/main.py) is a wrapper used for convince and simplicity.  
 ```
 usage: main.py [-h] -g GAME
 
@@ -47,16 +34,18 @@ optional arguments:
 
 Input
 ------
-The input flag searches a file directory (within the *maps* directory) that  
-matches the given input. Each PNG Image within this directory  
+For the input stage the given file directory is searched.  
+This directory given needs to be within the *maps* folder.  
+Each PNG Image within the input subdirectory of this folder   
 is analyzed for color information. The 10 most common colors are selected  
 (which is configurable in [global_values.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/globals/global_values.py) along with many other variables) and  
 made into a color swatch.
 
-Two statistics are also calculated:    
+Three statistics are also calculated:    
 
 1. The average distance between the top colors in [HSV](http://en.wikipedia.org/wiki/HSL_and_HSV) space  
 2. The average distance between the top colors in [LAB](http://en.wikipedia.org/wiki/Lab_color_space) space
+2. The average distance between the top colors in [RGB](https://en.wikipedia.org/wiki/RGB_color_space) space
 
 A [Dendrogram](http://en.wikipedia.org/wiki/Dendrogram) of the top 40 colors (which is also configured in [global_values.py](https://github.com/FireElementalNE/RetroColorAnalysis/blob/master/globals/global_values.py))  
 is also made. The distance matrix that is used to create the Dendrogram can be created using the values  

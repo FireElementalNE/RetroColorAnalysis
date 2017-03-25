@@ -6,7 +6,7 @@ import globals.global_values as global_values
 
 class ScatterPlot:
 
-    def __init__(self, cl, _dirs):
+    def __init__(self, cl, _dirs, _is_agg):
         '''
         init a scatter plot
         :param cl:  the list of colors
@@ -15,15 +15,19 @@ class ScatterPlot:
         '''
         self.color_list = cl
         self.dirs = _dirs
+        self.is_agg = _is_agg
 
     def make_file_name(self):
         '''
         create the correct filename for the scatter plot
         :return: the filename
         '''
-        base_name = os.path.basename(self.dirs[0]).split('.')[0]
-        d_name = '%s_%s_scatter.png' % (global_values.DISTANCE_TYPE, base_name)
-        return  os.path.join(self.dirs[3], d_name)
+        if not self.is_agg:
+            base_name = os.path.basename(self.dirs[0]).split('.')[0]
+            d_name = '%s_scatter.png' % (base_name)
+            return  os.path.join(self.dirs[3], d_name)
+        else:
+            return os.path.join(self.dirs[8], 'agg_scatter.png')
 
     def make_scatter_plot(self):
         '''

@@ -5,3 +5,9 @@
 .dendrogram-row {
 	 display: none;
 }
+.scatter-row {
+	 display: none;
+}
+.small-text {
+	font-size: 20px;
+}

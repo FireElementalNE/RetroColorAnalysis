@@ -9,9 +9,9 @@ def build_html(game_name):
     :param game_name: the game name
     :return: none (but html file is created)
     '''
-    arg_check = global_utils.check_input(game_name, global_values.HTML_MODE)
+    arg_check = global_utils.check_input(game_name)
     if arg_check[0]:
-        print 'HTML mode on %s' % game_name
+        print 'Creating HTML page for %s' % game_name
         stuff = ImgResult(game_name)
     else:
         sys.stdout.write('Bad args. Must be one of:\n')

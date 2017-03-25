@@ -44,6 +44,7 @@ DISTANCE_METRIC_TAG_RGB = "RGB Distance" # labels
 STAT_ENDING_TMP = 'stattmp' # tmp file ending
 
 DENDROGRAM_LABEL_HTML = 'View Dendrogram (click here)' # labels
+SCATTER_LABEL_HTML = 'View Scatter Plot (click here)' # labels
 
 FILE_STATS_RE = '^\[.*\] (.*)$' # re used for parsing color.statistics
 

@@ -114,7 +114,7 @@ def calculate_stats(final_list, stat_file_name):
     stat_fh.close()
 
 
-def make_scatter_plot(all_color_list, dirs):
+def make_scatter_plot(all_color_list, dirs, is_agg):
     '''
     create a scatter plot
     :param all_color_list: a list of colors for the scatter plot
@@ -136,7 +136,7 @@ def make_scatter_plot(all_color_list, dirs):
         else:
             print 'Incorrect setting in globals.DISTANCE_TYPE: ', global_values.DISTANCE_TYPE
             sys.exit(0)
-        splot = ScatterPlot(rgb_val_dict, dirs)
+        splot = ScatterPlot(rgb_val_dict, dirs, is_agg)
         splot.make_scatter_plot()
 
 
@@ -180,7 +180,7 @@ def analyze_outputs(dirs):
     counter = 0
     for root, dirnames, filenames in os.walk(output_dir):
         for filename in filenames:
-            if filename.endswith('png') and 'dendrogram' not in filename:
+            if filename.endswith('png') and 'dendrogram' not in filename and 'scatter' not in filename:
                 all_colors.append(actual_image_analysis(os.path.join(output_dir, filename)))
                 counter += 1
     final_list = []
@@ -212,6 +212,7 @@ def analyze_outputs(dirs):
         z = '-'.join([str(x) for x in el])
         new_final_list.append(z)
     make_d_matrix(new_final_list, dirs, True)
+    make_scatter_plot(new_final_list, dirs, True)
     calculate_stats(new_final_list, stat_file_name)
 
 def analyze_individual(dirs):
@@ -228,7 +229,7 @@ def analyze_individual(dirs):
     scatter_list = []
     for el in sorted_x[:global_values.MAX_SCATTER_POINTS]:
         scatter_list.append(el[0])
-    make_scatter_plot(scatter_list, dirs)
+    make_scatter_plot(scatter_list, dirs, False)
     imOut = Image.new("RGB",
                       [global_values.number_of_colors * global_values.number_of_colors,
                        global_values.number_of_colors],

@@ -118,15 +118,30 @@ class ImgResult:
         self.get_stats(True, 5, None)
         self.write_tag('div', global_values.END_TAG, 4)
         self.write_tag('div', global_values.END_TAG, 3)
+        # dendrogram click here
         self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
         self.write_to_fh_simple('div', {'class': 'row'}, None, 4, False)
         onclick_action_agg = 'slideit($(\'#agg_dendrogram\'))'
-        self.write_to_fh_simple('h2', {'onclick' : onclick_action_agg}, global_values.DENDROGRAM_LABEL_HTML, 5, True)
+        self.write_to_fh_simple('h2', {'onclick' : onclick_action_agg, 'class': 'small-text'}, global_values.DENDROGRAM_LABEL_HTML, 5, True)
         self.write_tag('div', global_values.END_TAG, 4)
         self.write_tag('div', global_values.END_TAG, 3)
+        # scatter click here
+        self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
+        self.write_to_fh_simple('div', {'class': 'row'}, None, 4, False)
+        onclick_action_agg = 'slideit($(\'#agg_scatter\'))'
+        self.write_to_fh_simple('h2', {'onclick': onclick_action_agg, 'class': 'small-text'}, global_values.SCATTER_LABEL_HTML, 5, True)
+        self.write_tag('div', global_values.END_TAG, 4)
+        self.write_tag('div', global_values.END_TAG, 3)
+        # hidden dendrogram img
         self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
         self.write_to_fh_simple('div', {'class': 'row dendrogram-row', 'id' : 'agg_dendrogram'}, None, 4, False)
         self.write_to_fh_simple('img', {'src': 'agg_dendrogram.png' }, None, 5, False)
+        self.write_tag('div', global_values.END_TAG, 4)
+        self.write_tag('div', global_values.END_TAG, 3)
+        # hidden scatter img
+        self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
+        self.write_to_fh_simple('div', {'class': 'row scatter-row', 'id': 'agg_scatter'}, None, 4, False)
+        self.write_to_fh_simple('img', {'src': 'agg_scatter.png'}, None, 5, False)
         self.write_tag('div', global_values.END_TAG, 4)
         self.write_tag('div', global_values.END_TAG, 3)
         for key in self.input_file_dict.keys():
@@ -154,16 +169,32 @@ class ImgResult:
                 self.get_stats(False, 5, key)
                 self.write_tag('div', global_values.END_TAG, 4)
                 self.write_tag('div', global_values.END_TAG, 3)
+                # dendrogram click here
                 self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
                 self.write_to_fh_simple('div', {'class': 'row'}, None, 4, False)
-                onclick_action = 'slideit($(\'#%s\'))' % key.split('.')[0]
-                self.write_to_fh_simple('h2', {'onclick' : onclick_action}, global_values.DENDROGRAM_LABEL_HTML, 5, True)
+                onclick_action = 'slideit($(\'#%s_dendrogram\'))' % key.split('.')[0]
+                self.write_to_fh_simple('h2', {'onclick' : onclick_action, 'class': 'small-text'}, global_values.DENDROGRAM_LABEL_HTML, 5, True)
                 self.write_tag('div', global_values.END_TAG, 4)
                 self.write_tag('div', global_values.END_TAG, 3)
+                # scatter click here
                 self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
-                self.write_to_fh_simple('div', {'class': 'row dendrogram-row', 'id' : key.split('.')[0]}, None, 4, False)
+                self.write_to_fh_simple('div', {'class': 'row'}, None, 4, False)
+                onclick_action = 'slideit($(\'#%s_scatter\'))' % key.split('.')[0]
+                self.write_to_fh_simple('h2', {'onclick': onclick_action, 'class': 'small-text'}, global_values.SCATTER_LABEL_HTML, 5, True)
+                self.write_tag('div', global_values.END_TAG, 4)
+                self.write_tag('div', global_values.END_TAG, 3)
+                # dentrogram hidden img
+                self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
+                self.write_to_fh_simple('div', {'class': 'row dendrogram-row', 'id' : key.split('.')[0] + '_dendrogram'}, None, 4, False)
                 dendrogram_src_top_colors = os.path.join('output', '%s_dendrogram.png' % key.split('.')[0])
                 self.write_to_fh_simple('img', {'src': dendrogram_src_top_colors }, None, 5, False)
+                self.write_tag('div', global_values.END_TAG, 4)
+                self.write_tag('div', global_values.END_TAG, 3)
+                # scatter hidden img
+                self.write_to_fh_simple('div', {'class': global_values.BOOTSTRAP_TWIDTH_STR}, None, 3, False)
+                self.write_to_fh_simple('div', {'class': 'row scatter-row', 'id': key.split('.')[0] + '_scatter'}, None, 4, False)
+                scatter_src_top_colors = os.path.join('output', '%s_scatter.png' % key.split('.')[0])
+                self.write_to_fh_simple('img', {'src': scatter_src_top_colors}, None, 5, False)
                 self.write_tag('div', global_values.END_TAG, 4)
                 self.write_tag('div', global_values.END_TAG, 3)
         self.write_tag('div', global_values.END_TAG, 4)

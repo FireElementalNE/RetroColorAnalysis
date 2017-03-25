@@ -138,10 +138,9 @@ def check_folders(game_name):
     check_folder(output_folder)
 
 
-def check_input(target_name, arg_type):
+def check_input(target_name):
     '''
     check the input see if passed game exists in file structure
-    :param target_name: the passed val
     :param arg_type: output or input
     :return: tuple of truth value an games that match
     '''
@@ -149,20 +148,7 @@ def check_input(target_name, arg_type):
     for dir_name in os.listdir(global_values.MAPS_DIR):
         if os.path.isdir(os.path.join(global_values.MAPS_DIR, dir_name)):
             target_list.append(dir_name)
-    if arg_type == global_values.INPUT_MODE:
-        return [target_name in target_list, target_list]
-    elif arg_type == global_values.OUTPUT_MODE:
-        if target_name in target_list:
-            full_name_dir = os.path.join(global_values.MAPS_DIR, target_name, global_values.OUTPUT_DIR)
-            counter = 0
-            for root, dirnames, filenames in os.walk(full_name_dir):
-                for filename in filenames:
-                    if filename.endswith('png'):
-                        counter += 1
-            return [counter > 0, target_list]
-    elif arg_type == global_values.HTML_MODE:
-        return [target_name in target_list, target_list]
-    return [False, target_list]
+    return [target_name in target_list, target_list]
 
 
 def get_games_list():

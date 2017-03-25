@@ -1,10 +1,15 @@
 [0-test-out_out]:=:HSV Distance: 0.60200958221
 [0-test-out_out]:=:LAB Distance: 86.3477424637
+[0-test-out_out]:=:RGB Distance: 176.124219702
 [1-test-out_out]:=:HSV Distance: 0.555055208559
 [1-test-out_out]:=:LAB Distance: 100.346614749
+[1-test-out_out]:=:RGB Distance: 192.026778207
 [2-test-out_out]:=:HSV Distance: 0.555708609776
 [2-test-out_out]:=:LAB Distance: 78.991137173
+[2-test-out_out]:=:RGB Distance: 141.290631118
 [3-test-out_out]:=:HSV Distance: 0.492549251303
 [3-test-out_out]:=:LAB Distance: 94.6628682017
+[3-test-out_out]:=:RGB Distance: 174.505432892
 [4-test-out_out]:=:HSV Distance: 0.466377172985
 [4-test-out_out]:=:LAB Distance: 99.2383562751
+[4-test-out_out]:=:RGB Distance: 175.104867125

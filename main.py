@@ -5,12 +5,7 @@ from globals.global_values import OUTPUT_MODE
 from html_builder.html_builder import build_html
 
 def run_main(game_name):
-	input_done = analyze_image(game_name, INPUT_MODE, False)
-	if input_done:
-		output_done = analyze_image(game_name, OUTPUT_MODE, False)
-		if output_done:
-			html_done = build_html(game_name)
-			
+	analyze_image(game_name, False)
 
 if __name__ == "__main__":
 	parser = argparse.ArgumentParser(description='Wrapper function')
