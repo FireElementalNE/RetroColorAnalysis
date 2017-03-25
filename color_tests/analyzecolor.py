@@ -13,59 +13,59 @@ from dendrograms.distance_matrix import DMatrix
 
 def test_white(pixel):
     '''
-    cant be too close to white
+    tests if a pixel is too close to white
     :param pixel: RGB pixel
-    :return: boolean if its too close
+    :return: true iff the pixel is too close to white
     '''
-    if avg(pixel) > 220:
-        return True
-    return False
+    gray_scale = color_utils.to_grayscale(pixel)
+    return gray_scale > global_values.WHITE_THRESHOLD
 
 
 def test_black(pixel):
     '''
-    cant be too close to black
+    tests if a pixel is too close to black
     :param pixel: RGB pixel
-    :return: boolean if its too close
+    :return: true iff the pixel is too close to black
     '''
-    if avg(pixel) < 35:
-        return True
-    return False
+    gray_scale = color_utils.to_grayscale(pixel)
+    return gray_scale < global_values.BLACK_THRESHOLD
 
 
-def avg(list):
+def avg(lst):
     '''
     returns the avg of a list
     :param list: the list
     :return: the average
     '''
     sum = 0
-    for elm in list:
+    for elm in lst:
         sum += elm
-    return sum / (len(list))
+    return sum / (len(lst))
 
 
-def avg_color_list(list):
+def avg_color_list(color_lst):
     '''
-    returs the averages in a list
-    :param list:
-    :return:
+    returns the average color in a list of colors
+    :param color_lst: the list of colors (a list of '-' separated values in a string)
+    :return: the average color in the list
     '''
     sum_list = [0, 0, 0]
-    for elm in list:
+    for elm in color_lst:
         elem = elm[0].split('-')
         sum_list[0] += int(elem[0])
         sum_list[1] += int(elem[1])
         sum_list[2] += int(elem[2])
-    sum_list[0] = sum_list[0] / len(list)
-    sum_list[1] = sum_list[1] / len(list)
-    sum_list[2] = sum_list[2] / len(list)
+    sum_list[0] = sum_list[0] / len(color_lst)
+    sum_list[1] = sum_list[1] / len(color_lst)
+    sum_list[2] = sum_list[2] / len(color_lst)
     return sum_list
 
 
 def actual_image_analysis(full_file_name):
     '''
-    Does the actual pixel analysis
+    Analyze one image, creates a list of tuples that is sorted by pixel count
+    so if a color appears more in the image it will be closer to the front
+    of the list
     :param full_file_name: the filename
     :return: the list of most common colors
     '''
@@ -83,7 +83,8 @@ def actual_image_analysis(full_file_name):
                     hash_list[keyStr] = 1
                 else:
                     hash_list[keyStr] += 1
-
+    original.close()
+    # sorts the list
     sorted_x = sorted(hash_list.items(), key=operator.itemgetter(1))
     sorted_x = sorted_x[::-1]
     return sorted_x
@@ -100,10 +101,14 @@ def calculate_stats(final_list, stat_file_name):
     stat_fh = open(stat_file_name, 'w+')
     distance_metric1 = color_utils.avg_distance_colors(final_list, 'hsv')
     distance_metric2 = color_utils.avg_distance_colors(final_list, 'lab')
+    distance_metric3 = color_utils.avg_distance_colors(final_list, 'rgb')
+
     stat = [[os.path.basename(stat_file_name).split('.')[0],
              global_values.DISTANCE_METRIC_TAG_HSV, str(distance_metric1)],
             [os.path.basename(stat_file_name).split('.')[0],
-             global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)]]
+             global_values.DISTANCE_METRIC_TAG_LAB, str(distance_metric2)],
+            [os.path.basename(stat_file_name).split('.')[0],
+             global_values.DISTANCE_METRIC_TAG_RGB, str(distance_metric3)]]
     for x in stat:
         global_utils.write_to_stat_fh(stat_fh,x)
     stat_fh.close()
@@ -137,7 +142,7 @@ def make_scatter_plot(all_color_list, dirs):
 
 def make_d_matrix(sorted_color_list, dirs, is_agg):
     '''
-    Make dendrogram, uses either LAB, HSV or RGB values to create
+    Make dendrogram, using  LAB, HSV or RGB values for the
     distance matrix
     :param sorted_color_list: a list of colors for the dendrogram
     :param dirs: the dirs array
@@ -165,7 +170,8 @@ def make_d_matrix(sorted_color_list, dirs, is_agg):
 
 def analyze_outputs(dirs):
     '''
-    Analyze the output images from the input step
+    Analyze the output images from the input step, creates
+    color swatches for the most common colors
     :param dirs: the dirs structure
     :return: nothing makes stats and image file
     '''
@@ -199,6 +205,7 @@ def analyze_outputs(dirs):
             pixels[x, y] = (int(current[0]), int(current[1]), int(current[2]))
         count += 1
     imOut.save(dirs[7])
+    imOut.close()
     stat_file_name = dirs[6]
     new_final_list = []
     for el in final_list:
@@ -238,13 +245,13 @@ def analyze_individual(dirs):
             current_split = current[0].split('-')
             pixels[x, y] = (int(current_split[0]), int(current_split[1]), int(current_split[2]))
         count += 1
+    # save image
     imOut.save(output_filename)
+    imOut.close()
     new_sorted_x = []
-
     for el in sorted_x[:global_values.number_of_colors]:
         new_sorted_x.append(el[0])
     calculate_stats(new_sorted_x, stat_file_name)
-
     d_gram_sorted_x = []
     actual_dgram_num = global_values.D_GRAM_NUMBER
     if global_values.D_GRAM_NUMBER >= len(sorted_x): # if we have less colors than are required

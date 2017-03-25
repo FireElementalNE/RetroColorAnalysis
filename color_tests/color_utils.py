@@ -3,6 +3,18 @@
 import math
 from globals.global_utils import euclid, print_run_main_error
 
+
+def to_grayscale(pixel):
+    '''
+    converts a pixel to grayscale
+    http://stackoverflow.com/a/9780689
+    :param pixel: the pixel
+    :return: grayscale value of the pixel
+    '''
+    Y = 0.2126 * pixel[0] + 0.7152 * pixel[1] + 0.0722 * pixel[2]
+    return Y
+
+
 def rgb_to_lab(r, g, b):
     '''
     converts rgb to lab color space
@@ -99,65 +111,67 @@ def avg_of_list(lst):
     return sum / len(lst)
 
 
-def convert_lab_list(rgb_list):
+def convert_lab_list(rgb_str_list):
     '''
-    converts all rbg values in a list
-    to lab
-    :param rgb_list: rbg list
-    :return: lab list
+    convert string RGB list to numerical LAB list
+    :param rgb_str_list: string RGB list
+    :return: numerical LAB list
     '''
     lab_list = []
-    for color in rgb_list:
+    for color in rgb_str_list:
         el = color.split('-')
         lab_list.append(rgb_to_lab(int(el[0]), int(el[1]), int(el[2])))
     return lab_list
 
 
-def convert_hsv_list(rgb_list):
+def convert_hsv_list(rgb_str_list):
     '''
-    converts all rbg values in a list
-    to hsv
-    :param rgb_list: rbg list
-    :return: hsv list
+    convert string RGB list to numerical HSV list
+    :param rgb_str_list: string RGB list
+    :return: numerical HSV list
     '''
     hsv_list = []
-    for color in rgb_list:
+    for color in rgb_str_list:
         el = color.split('-')
         hsv_list.append(rgb_to_hsv(int(el[0]), int(el[1]), int(el[2])))
     return hsv_list
 
+def convert_rgb_list(rgb_str_list):
+    '''
+    convert string RGB list to numerical RGB list
+    :param rgb_str_list: string RGB list
+    :return: numerical RGB list
+    '''
+    rgb_list = []
+    for color in rgb_str_list:
+        el = color.split('-')
+        rgb_list.append([int(el[0]), int(el[1]), int(el[2])])
+    return rgb_list
+
 def avg_distance_colors(color_list, t):
     '''
+    computes the average distance between colors
     :param color_list: a list of rgb colors
     :param t: the type of conversion
     :return: the selected metric
     '''
     if t == 'hsv':
-        hsv_list = convert_hsv_list(color_list)
-        final_distance_list = []
-        for color in hsv_list:
-            distance_list = []
-            for other_color in hsv_list:
-                if other_color == color:
-                    continue
-                else:
-                    d = euclid(color[0], color[1], color[2], other_color[0], other_color[1], other_color[2])
-                    distance_list.append(d)
-            final_distance_list.append(avg_of_list(distance_list))
-        return avg_of_list(final_distance_list)
+        c_list = convert_hsv_list(color_list)
     elif t == 'lab':
-        lab_list = convert_lab_list(color_list)
-        final_distance_list = []
-        for color in lab_list:
-            distance_list = []
-            for other_color in lab_list:
-                if other_color == color:
-                    continue
-                else:
-                    d = euclid(color[0], color[1], color[2], other_color[0], other_color[1], other_color[2])
-                    distance_list.append(d)
-            final_distance_list.append(avg_of_list(distance_list))
-        return avg_of_list(final_distance_list)
+        c_list = convert_lab_list(color_list)
+    else:
+        c_list = convert_rgb_list(color_list)
+    final_distance_list = []
+    for color in c_list:
+        distance_list = []
+        for other_color in c_list:
+            if other_color == color:
+                continue
+            else:
+                d = euclid(color[0], color[1], color[2], other_color[0], other_color[1], other_color[2])
+                distance_list.append(d)
+        final_distance_list.append(avg_of_list(distance_list))
+    return avg_of_list(final_distance_list)
 
 if __name__ == "__main__":
     print_run_main_error()

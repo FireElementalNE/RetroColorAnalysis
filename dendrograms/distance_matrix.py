@@ -74,6 +74,7 @@ class DMatrix:
         dendrogram(linked, truncate_mode=global_values.TRUNCATE_MODE,
                    p=global_values.P, labels=label_array, orientation=global_values.ORIENTATION)
         plt.savefig(self.make_file_name())
+        plt.close()
 
 if __name__ == "__main__":
     print_run_main_error()

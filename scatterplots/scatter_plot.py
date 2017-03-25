@@ -38,10 +38,20 @@ class ScatterPlot:
         b = []
         for k, v in self.color_list.iteritems():
             ax.scatter(v[0], v[1], v[2], c='r', marker='.')
-        ax.set_xlabel('X Label')
-        ax.set_ylabel('Y Label')
-        ax.set_zlabel('Z Label')
+        if global_values.DISTANCE_TYPE == 'HSV':
+            labels = global_values.HSV_SCATTER_LABELS
+        elif global_values.DISTANCE_TYPE == 'LAB':
+            labels = global_values.LAB_SCATTER_LABELS
+        elif global_values.DISTANCE_TYPE == 'RGB':
+            labels = global_values.RGB_SCATTER_LABELS
+        else:
+            labels = ['???', '???', '???']
+
+        ax.set_xlabel(labels[0])
+        ax.set_ylabel(labels[1])
+        ax.set_zlabel(labels[2])
 
         plt.savefig(self.make_file_name())
+        plt.close()
 
 

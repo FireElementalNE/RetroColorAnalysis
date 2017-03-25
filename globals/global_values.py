@@ -29,10 +29,18 @@ SCRIPT_JS = '../../HTML_STATIC/Javascript/script.js' # for html imports
 
 DISTANCE_TYPE = 'HSV' # The color space the dengrams use to calculate distance (Can be RGB, LAB or HSV)
 
+WHITE_THRESHOLD = 250 # threshold for white
+BLACK_THRESHOLD = 5 # threshold for black
+
+HSV_SCATTER_LABELS = ['Hue', 'Saturation', 'Value']
+LAB_SCATTER_LABELS = ['Lightness', 'a', 'b']
+RGB_SCATTER_LABELS = ['Red', 'Green', 'Blue']
+
 STATS_FILENAME = 'color.statistics' # the combined color statistics file (not aggregated)
 STATS_FILENAME_AGG = 'color_aggregate.statistics' # the aggregated stats file
 DISTANCE_METRIC_TAG_HSV = "HSV Distance" # labels
 DISTANCE_METRIC_TAG_LAB = "LAB Distance" # labels
+DISTANCE_METRIC_TAG_RGB = "RGB Distance" # labels
 STAT_ENDING_TMP = 'stattmp' # tmp file ending
 
 DENDROGRAM_LABEL_HTML = 'View Dendrogram (click here)' # labels
